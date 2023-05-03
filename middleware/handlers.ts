@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 
-import APIError from "../utils/errors";
+import { APIError } from "../utils/errors";
+import log from "../config/log";
 
 export const errorHandler = (
   err: Error,
@@ -11,6 +12,7 @@ export const errorHandler = (
   if (err instanceof APIError) {
     res.status(err.code).json({ message: err.message });
   } else if (err instanceof Error) {
+    log.error(err);
     res.status(500).json({ message: "Something went wrong" });
   }
 };

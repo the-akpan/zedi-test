@@ -1,15 +1,22 @@
-import { setPort } from './config'
+import { setPort } from "./config";
+import connect from "./database";
+import { setupAdmin } from "./user";
 
-export * from './config'
+export * from "./cors";
 
 class Config {
-  PORT: number
+  PORT: number;
 
   constructor() {
-    this.PORT = setPort()
+    this.PORT = setPort();
+  }
+
+  async init(): Promise<void> {
+    await connect();
+    await setupAdmin();
   }
 }
 
-const config = new Config()
+const config = new Config();
 
-export default config
+export default config;

@@ -1,4 +1,4 @@
-export default class APIError extends Error {
+export class APIError extends Error {
   code: number;
 
   constructor(code: number, message: string) {
@@ -6,3 +6,5 @@ export default class APIError extends Error {
     this.code = code;
   }
 }
+
+export class ZediError extends Error {}
